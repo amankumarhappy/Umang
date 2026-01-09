@@ -11,6 +11,7 @@ import Cultural from './pages/Cultural';
 import Teams from './pages/Teams';
 import About from './pages/About';
 import EventDetails from './pages/EventDetails';
+import UmangAI from './components/ai/UmangAI';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -40,6 +41,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <UmangAI />
         </div>
       </Router>
     </ThemeProvider>

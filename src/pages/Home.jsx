@@ -4,6 +4,7 @@ import { MapPin, ArrowRight, Activity, Music, Trophy, Phone, User } from 'lucide
 import { motion } from 'framer-motion';
 import { eventsData, FESTIVAL_DETAILS } from '../data/events';
 import Contact from '../components/home/Contact';
+import SpinWheel from '../components/game/SpinWheel';
 
 const Home = () => {
     const [displayState, setDisplayState] = useState('countdown'); // countdown or live
@@ -157,6 +158,11 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Spin & Win */}
+            <section className="max-w-4xl mx-auto mb-16">
+                <SpinWheel />
+            </section>
+
             {/* Winner Section */}
             <section className="max-w-4xl mx-auto mb-16">
                 <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 text-white text-center shadow-lg relative overflow-hidden">
@@ -210,7 +216,7 @@ const Home = () => {
             </section>
 
             <Contact />
-        </div>
+        </div >
     );
 };
 
