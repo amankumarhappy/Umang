@@ -35,7 +35,18 @@ const Hero = () => {
             <div className="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-accent-primary opacity-10 blur-[100px] rounded-full pointer-events-none" />
             <div className="absolute bottom-[-20%] left-[-10%] w-[400px] h-[400px] bg-accent-secondary opacity-10 blur-[100px] rounded-full pointer-events-none" />
 
-            <div className="container relative z-10 py-12">
+            {/* Inauguration Notice - Moved to be in-flow to ensure visibility */}
+            <div className="container relative z-20 mb-8 flex justify-center">
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-red-600 text-white px-6 py-2 rounded-full shadow-lg flex items-center gap-2 text-sm font-bold animate-pulse text-center"
+                >
+                    <span>📢 Participants are informed to report at auditorium for inauguration sharply at 11:00 AM</span>
+                </motion.div>
+            </div>
+
+            <div className="container relative z-10 py-2">
 
                 {/* Main Content */}
                 <div className="text-center space-y-6 max-w-4xl mx-auto">

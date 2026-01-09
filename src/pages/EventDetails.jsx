@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { eventsData } from '../data/events';
-import { MapPin, User, ChevronLeft, Shield, Clock, Calendar } from 'lucide-react';
+import { MapPin, User, ChevronLeft, Shield, Clock, Calendar, Trophy, FileText } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EventDetails = () => {
@@ -134,6 +134,52 @@ const EventDetails = () => {
                         </motion.div>
                     )}
 
+                    {/* Results Section */}
+                    {event.results && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.15 }}
+                            className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700"
+                        >
+                            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                                <Trophy size={24} className="text-yellow-500" />
+                                Results
+                            </h3>
+                            <div className="space-y-6">
+                                {event.results.map((result, idx) => (
+                                    <div key={idx} className="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+                                        <div className="bg-yellow-50 dark:bg-yellow-900/10 px-4 py-3 border-b border-gray-200 dark:border-gray-700 font-bold text-sm text-slate-700 dark:text-gray-200 flex justify-between items-center">
+                                            <span>{result.title}</span>
+                                            <Trophy size={16} className="text-yellow-500" />
+                                        </div>
+                                        <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                                            {result.winners.map((winner, wIdx) => (
+                                                <div key={wIdx} className="p-4 flex justify-between items-center text-sm">
+                                                    <div className="flex items-center gap-3">
+                                                        <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${winner.position === 1 ? 'bg-yellow-100 text-yellow-700' :
+                                                            winner.position === 2 ? 'bg-gray-100 text-gray-700' : 'bg-orange-100 text-orange-700'
+                                                            }`}>
+                                                            {winner.position}
+                                                        </span>
+                                                        <span className="font-medium text-slate-900 dark:text-white">
+                                                            {winner.name}
+                                                        </span>
+                                                    </div>
+                                                    {winner.score && (
+                                                        <span className="text-gray-500 dark:text-gray-400 text-xs font-mono">
+                                                            {winner.score}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+
                     {/* Coordinators */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -176,7 +222,22 @@ const EventDetails = () => {
                         <button className="w-full py-3 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-bold text-gray-600 dark:text-gray-300 hover:border-brand-blue hover:text-brand-blue transition-colors mb-3">
                             Download Rulebook
                         </button>
-                        <p className="text-xs text-center text-gray-400">Rules PDF available soon.</p>
+
+                        {event.scorecard ? (
+                            <a
+                                href={event.scorecard}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full py-3 bg-brand-blue text-white rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/20"
+                            >
+                                <FileText size={18} />
+                                View Scorecard
+                            </a>
+                        ) : (
+                            <p className="text-xs text-center text-gray-400">Scorecard not available.</p>
+                        )}
+
+                        {!event.scorecard && <p className="text-xs text-center text-gray-400 mt-2">Rules PDF available soon.</p>}
                     </div>
                 </div>
 

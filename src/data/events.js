@@ -147,7 +147,7 @@ export const eventsData = [
             {
                 day: 'Day 2 (10/01/2026) - Semi Final',
                 matches: [
-                    { time: '4:00 PM - 4:30 PM', match: 'Semi Final 1', venue: 'Badminton Court' },
+                    { time: '4:00 PM - 4:30 PM', match: 'Team Amir vs TBD (Semi Final 1)', venue: 'Badminton Court' },
                     { time: '4:30 PM - 5:00 PM', match: 'Semi Final 2', venue: 'Badminton Court' }
                 ]
             },
@@ -348,11 +348,56 @@ export const eventsData = [
         ]
     },
     {
+        id: 'athletics-track',
+        name: 'Track Events (Sprints)',
+        category: 'sports',
+        icon: '🏃💨',
+        status: 'live',
+        gender: 'Mixed',
+        venue: 'Athletics Ground',
+        description: '100M, 200M, 400M races.',
+        coordinators: [
+            { name: 'Sushant Kumar', phone: '7903077943' },
+            { name: 'Prince Raj', phone: '9031099637' }
+        ],
+        results: [
+            {
+                title: '100M Sprint (Boys) - Round 1',
+                winners: [
+                    { position: 1, name: 'Vaibhav Kumar (25CS64)' },
+                    { position: 2, name: 'Aditya Gupta (04CS52)' }
+                ]
+            },
+            {
+                title: '100M Sprint (Girls) - Final',
+                winners: [
+                    { position: 1, name: 'Sonali' },
+                    { position: 2, name: 'Anwardha' }
+                ]
+            },
+            {
+                title: '200M Sprint (Girls) - Round 1',
+                winners: [
+                    { position: 1, name: 'Sonali Bharti' },
+                    { position: 2, name: 'Aashika Yadav' }
+                ]
+            },
+            {
+                title: '200M Sprint (Girls) - Round 1 (Heat 2)',
+                winners: [
+                    { position: 1, name: 'Anshika Raj' },
+                    { position: 2, name: 'Annu Kumari' }
+                ]
+            }
+        ],
+        scorecard: '/scorecards/100_m_sprint_score_sheet.pdf'
+    },
+    {
         id: 'athletics-throws',
         name: 'Javelin, Shot Put, Discus',
         category: 'sports',
         icon: '💪',
-        status: 'upcoming',
+        status: 'completed',
         gender: 'Mixed',
         venue: 'Athletics Ground',
         description: 'Test of power and technique.',
@@ -362,7 +407,17 @@ export const eventsData = [
             { name: 'Anmol Sharan', phone: '7340134201' },
             { name: 'Rekha Kumari', phone: '7765911682' },
             { name: 'Sapna Kumari', phone: '9122135574' }
-        ]
+        ],
+        results: [
+            {
+                title: 'Javelin Throw (Boys) - Final',
+                winners: [
+                    { position: 1, name: 'Chandra Prakash (24CS04)' },
+                    { position: 2, name: 'Nikhil' }
+                ]
+            }
+        ],
+        scorecard: '/scorecards/Javelin_score_sheet_boys.pdf'
     },
 
     // --- CULTURAL ---
@@ -373,7 +428,9 @@ export const eventsData = [
         icon: '📝',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '11:30 AM - 12:30 PM',
+        status: 'upcoming',
+        gender: 'Mixed',
+        timing: '11:00 AM onwards',
         date: '10/01/2026',
         venue: 'Faculty Lounge',
         description: 'Express your thoughts through writing.',
@@ -390,7 +447,9 @@ export const eventsData = [
         icon: '✍️',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '10:00 AM - 11:00 AM',
+        status: 'upcoming',
+        gender: 'Mixed',
+        timing: '11:00 AM onwards',
         date: '10/01/2026',
         venue: 'Faculty Lounge',
         description: 'Weave a compelling story.',
@@ -407,7 +466,8 @@ export const eventsData = [
         icon: '🗣️',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '2:30 PM - 3:30 PM',
+        gender: 'Mixed',
+        timing: '3:00 PM – 6:00 PM',
         date: '10/01/2026',
         venue: 'Faculty Lounge',
         description: 'Debate and discuss current topics.',
@@ -424,8 +484,8 @@ export const eventsData = [
         icon: '🎙️',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '12:00 PM - 1:30 PM',
-        date: '10/01/2026',
+        timing: '3:00 PM – 6:00 PM',
+        date: '11/01/2026',
         venue: 'Auditorium',
         description: 'Verbal battle of logic and rhetoric.',
         coordinators: [
@@ -493,7 +553,7 @@ export const eventsData = [
         icon: '⏱️',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '12:00 PM - 1:00 PM',
+        timing: 'From 6:00 PM onwards',
         date: '11/01/2026',
         venue: 'Auditorium',
         description: 'Spontaneous speaking skills.',
@@ -510,8 +570,8 @@ export const eventsData = [
         icon: '❓',
         status: 'upcoming',
         gender: 'Mixed',
-        timing: '4:00 PM - 5:00 PM',
-        date: '10/01/2026',
+        timing: '11:00 AM onwards',
+        date: '11/01/2026',
         venue: 'Seminar Hall',
         description: 'Test of general knowledge.',
         coordinators: [
