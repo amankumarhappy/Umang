@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, ArrowRight, Activity, Music, Trophy, Phone, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { eventsData, FESTIVAL_DETAILS } from '../data/events';
+import Contact from '../components/home/Contact';
 
 const Home = () => {
     const [displayState, setDisplayState] = useState('countdown'); // countdown or live
@@ -207,6 +208,8 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            <Contact />
         </div>
     );
 };
