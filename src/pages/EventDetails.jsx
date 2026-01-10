@@ -49,11 +49,25 @@ const EventDetails = () => {
                             </div>
 
                             {isLive && (
-                                <button className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all flex items-center gap-3 animate-pulse">
+                                <button
+                                    onClick={() => event.liveUrl && window.open(event.liveUrl, '_blank')}
+                                    className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl shadow-lg shadow-red-500/20 transition-all flex items-center gap-3 animate-pulse"
+                                >
                                     Live Scoreboard
                                 </button>
                             )}
                         </div>
+
+                        {isLive && event.liveUrl && (
+                            <div className="mb-8 w-full h-[600px] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg bg-gray-100 dark:bg-slate-900">
+                                <iframe
+                                    src={event.liveUrl}
+                                    title="Live Scoreboard"
+                                    className="w-full h-full"
+                                    loading="lazy"
+                                ></iframe>
+                            </div>
+                        )}
 
                         <div className="grid sm:grid-cols-2 gap-6 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-6">
                             <div className="flex items-start gap-3">

@@ -29,13 +29,13 @@ const Sports = () => {
 
                 {/* Filters */}
                 <div className="flex flex-wrap gap-2">
-                    {['all', 'live', 'upcoming', 'completed'].map((status) => (
+                    {['all', 'live', 'completed'].map((status) => (
                         <button
                             key={status}
                             onClick={() => setFilter(status)}
                             className={`px-4 py-2 rounded-full text-sm font-semibold capitalize transition-all ${filter === status
-                                    ? 'bg-brand-blue text-white shadow-lg shadow-blue-500/30'
-                                    : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700'
+                                ? 'bg-brand-blue text-white shadow-lg shadow-blue-500/30'
+                                : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-slate-700'
                                 }`}
                         >
                             {status}
