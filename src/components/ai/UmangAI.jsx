@@ -81,22 +81,27 @@ const UmangAI = () => {
 
             let text = "";
             try {
-                // Try gemini-pro first as it's the most standard model
-                const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+                // Use gemini-1.5-flash as it's the current standard (fast & stable)
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
                 const prompt = `${systemContext}\n\nUser: ${userMessage}`;
+
                 const result = await model.generateContent(prompt);
                 const response = await result.response;
                 text = response.text();
             } catch (firstError) {
-                console.warn("Gemini Pro failed, trying Flash...", firstError);
+                console.warn("Gemini 1.5 Flash failed, trying Pro...", firstError);
                 try {
-                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+                    // Fallback to Pro if Flash fails
+                    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
                     const prompt = `${systemContext}\n\nUser: ${userMessage}`;
+
                     const result = await model.generateContent(prompt);
                     const response = await result.response;
                     text = response.text();
                 } catch (secondError) {
-                    throw firstError;
+                    // If both fail, log details and throw the error from the primary model attempt (or second)
+                    console.error("All Gemini models failed.", secondError);
+                    throw secondError;
                 }
             }
 
