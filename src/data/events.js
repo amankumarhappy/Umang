@@ -1,11 +1,12 @@
+
 export const FESTIVAL_DETAILS = {
-    name: 'UMANG 2026',
-    tagline: 'Annual Sports & Cultural Fest',
+    name: 'PATNA DIVISIONAL SPORTS FEST',
+    tagline: 'Zonal Level',
     organizer: 'DSTTE, Bihar',
     host: 'Government Engineering College, Buxar',
     dates: {
-        start: '2026-01-10',
-        end: '2026-01-12'
+        start: '2026-01-15',
+        end: '2026-01-17'
     },
     contacts: {
         faculty: [
@@ -16,586 +17,944 @@ export const FESTIVAL_DETAILS = {
             { name: 'Sushil Kumar', batch: '2K22', phone: '8544688394' },
             { name: 'Ankit Kumar', batch: '2K23', phone: '9931602713' }
         ]
+    },
+    previous_event: {
+        name: 'Intra College Event',
+        dates: '09-12 January 2026',
+        status: 'Completed'
     }
 };
 
-export const eventsData = [
-    // --- SPORTS ---
+// --- ZONAL EVENTS (15-17 Jan 2026) ---
+export const zonalEvents = [
+    // --- BADMINTON ---
     {
-        id: 'cricket',
-        name: 'Cricket',
-        category: 'sports',
-        icon: '🏏',
-        status: 'live',
-        liveUrl: 'https://cricheroes.com/scorecard/21470369/individual/team-ritesh-sir-vs-team-vijay/live',
-        gender: 'Boys',
-        venue: 'GEC Buxar Cricket Ground',
-        description: 'The gentleman\'s game. T20 Format.',
-        coordinators: [
-            { name: 'Divyank Pandey', phone: '7979976762' },
-            { name: 'Keshav Raj', phone: '9470656222' },
-            { name: 'Rishu Raj', phone: '8409673549' },
-            { name: 'Aalok Kumar', phone: '8603696763' },
-            { name: 'Ashutosh Kumar', phone: '9631184110' },
-            { name: 'Navneet', phone: '8235949226' }
-        ],
-        schedule: [
-            {
-                day: 'Day 1 (10/01/2026)',
-                matches: [
-                    { time: '9:00 AM - 10:00 AM', match: 'Team Navneet Vs Team Rahul', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '11:00 AM - 1:00 PM', match: 'Team Keshav Vs Team Aditya', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '2:00 PM - 4:00 PM', match: 'Team Navneet Vs Team Rahul', venue: 'GEC Buxar Cricket Ground' }
-                ]
-            },
-            {
-                day: 'Day 2 (11/01/2026)',
-                matches: [
-                    { time: '9:00 AM - 10:00 AM', match: 'Team Aditya Vs Team Ashutosh', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '11:00 AM - 1:00 PM', match: 'Team Rahul Vs Team Rishu', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '2:00 PM - 4:00 PM', match: 'Team Keshav Vs Team Ashutosh', venue: 'GEC Buxar Cricket Ground' }
-                ]
-            },
-            {
-                day: 'Day 3 (12/01/2026) - Final Day',
-                matches: [
-                    { time: '9:00 AM - 10:00 AM', match: 'Group A Semi Final', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '11:00 AM - 1:00 PM', match: 'Group B Semi Final', venue: 'GEC Buxar Cricket Ground' },
-                    { time: '2:00 PM - 4:00 PM', match: 'Final', venue: 'GEC Buxar Cricket Ground' }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'volleyball-boys',
-        name: 'Volleyball (Boys)',
-        category: 'sports',
-        icon: '🏐',
-        status: 'live',
-        gender: 'Boys',
-        venue: 'GEC Buxar Acad. Ground',
-        description: 'High energy 6v6 match.',
-        coordinators: [
-            { name: 'Ayush Kumar', phone: '8292770725' },
-            { name: 'Avinash Kumar', phone: '6206621858' },
-            { name: 'Rao Ankit', phone: '8969135824' },
-            { name: 'Kundan Kumar', phone: '9241183971' },
-            { name: 'Amit Raj', phone: '8210758522' },
-            { name: 'Vishal Kumar', phone: '9835202041' },
-            { name: 'Kumari Khushi', phone: '9031599674' },
-            { name: 'Anshika Raj', phone: '8986447235' }
-        ],
-        schedule: [
-            {
-                day: 'Day 1 (09/01/2026)',
-                matches: [
-                    { time: '9:00 AM - 10:30 AM', match: 'Team Anurag vs Team Ankit', venue: 'Acad. Ground' },
-                    { time: '10:30 AM - 12:00 PM', match: 'Team Ayush vs Team Akshay', venue: 'Acad. Ground' },
-                    { time: '1:30 PM - 3:00 PM', match: 'Team Anurag vs Team Ayush', venue: 'Acad. Ground' },
-                    { time: '3:30 PM - 4:30 PM', match: 'Team Ankit vs Team Chiku', venue: 'Acad. Ground' }
-                ]
-            },
-            {
-                day: 'Day 2 (10/01/2026)',
-                matches: [
-                    { time: '9:00 AM - 10:30 AM', match: 'Team Anurag vs Team Akshay', venue: 'Acad. Ground' },
-                    { time: '10:30 AM - 12:00 PM', match: 'Team Ayush vs Team Chiku', venue: 'Acad. Ground' },
-                    { time: '1:30 PM - 3:00 PM', match: 'Team Anurag vs Team Chiku', venue: 'Acad. Ground' },
-                    { time: '3:30 PM - 4:30 PM', match: 'Team Ankit vs Team Akshay', venue: 'Acad. Ground' }
-                ]
-            },
-            {
-                day: 'Day 3 (11/01/2026)',
-                matches: [
-                    { time: '9:00 AM - 10:30 AM', match: 'Team Ankit vs Team Ayush', venue: 'Acad. Ground' },
-                    { time: '10:30 AM - 12:00 PM', match: 'Team Akshay vs Team Chiku', venue: 'Acad. Ground' },
-                    { time: '1:30 PM - 3:00 PM', match: 'Semi-Final', venue: 'Acad. Ground' }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'badminton-boys',
+        id: 'zonal-badminton-boys',
         name: 'Badminton (Boys)',
         category: 'sports',
         icon: '🏸',
-        status: 'live',
-        gender: 'Boys',
-        venue: 'Badminton Court',
-        description: 'Smash and Drop.',
+        status: 'upcoming',
+        venue: 'GEC Buxar (Academic Badminton Court 1)',
+        image: '/EVENT PHOTO/BADMINTON.jpg',
+        description: 'Smash and Drop. Group A & B battles.',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Abhishek Kumar', phone: '6203566373' },
-            { name: 'Ankesh Kumar', phone: '9523562719' },
-            { name: 'Shushant Kumar', phone: '8757155992' },
-            { name: 'Prabhat Shankar Singh', phone: '7783032138' },
-            { name: 'MD Aamir', phone: '9570080513' },
-            { name: 'Satish Kumar', phone: '7783883573' },
-            { name: 'Ritu Pandey', phone: '8521840199' },
-            { name: 'Khushi Kumari', phone: '7667298094' }
+            { name: 'Dr. Shailesh Kumar', phone: '7906209274', role: 'Faculty' },
+            { name: 'Md. Ahmad', phone: '9958470800', role: 'Faculty' },
+            { name: 'Sushil Kumar', phone: '8544688394', role: 'Student (2K22)' },
+            { name: 'Ankit Kumar', phone: '9931602713', role: 'Student (2K23)' }
         ],
+        teams: ['GEC Buxar', 'GEC Bhojpur', 'GEC Kaimur', 'BCE Bakhtiyarpur', 'SEC Sasaram', 'NCE Chandi'],
         schedule: [
             {
-                day: 'Day 1 (09/01/2026)',
+                day: 'Day 1 (15 Jan 2026)',
                 matches: [
-                    { time: '10:00 AM - 10:30 AM', match: 'Team Amir vs Team Satish', venue: 'Badminton Court' },
-                    { time: '10:30 AM - 11:00 AM', match: 'Team Prabhat vs Team Abhishek', venue: 'Badminton Court' },
-                    { time: '11:00 AM - 11:30 AM', match: 'Team Amir vs Team Akash', venue: 'Badminton Court' },
-                    { time: '11:30 AM - 12:00 PM', match: 'Team Prabhat vs Team Raushan', venue: 'Badminton Court' },
-                    { time: '12:00 PM - 12:30 PM', match: 'Team Satish vs Team Akash', venue: 'Badminton Court' },
-                    { time: '12:30 PM - 1:00 PM', match: 'Team Abhishek vs Team Raushan', venue: 'Badminton Court' }
+                    { time: '9:00 Am to 9:30 Am', match: 'GEC BUXAR VS SEC SASARAM', venue: 'Court 1' },
+                    { time: '9:40 Am to 10:10 Am', match: 'BCE BKP VS GEC BHOJPUR', venue: 'Court 1' },
+                    { time: '10:20 Am to 10:50 Am', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'Court 1' },
+                    { time: '9:00 Am to 9:30 Am', match: 'GEC BHOJPUR VS NCE CHANDI', venue: 'Court 1' },
+                    { time: '9:40 Am to 10:10 Am', match: 'SEC SASARAM VS GEC KAIMUR', venue: 'Court 1' },
+                    { time: '10:20 Am to 10:50 Am', match: 'NCE CHANDI VS BCE BKP', venue: 'Court 1' },
+                    { time: '11:30 Am to 12:00 Pm', match: 'Semifinal 1: Top Group A vs Second Group B', venue: 'Court 1' },
+                    { time: '11:30 Am to 12:00 Pm', match: 'Semifinal 2: Top Group B vs Second Group A', venue: 'Court 1' }
                 ]
             },
             {
-                day: 'Day 2 (10/01/2026) - Semi Final',
+                day: 'Day 2 (16 Jan 2026)',
                 matches: [
-                    { time: '4:00 PM - 4:30 PM', match: 'Team Amir vs TBD (Semi Final 1)', venue: 'Badminton Court' },
-                    { time: '4:30 PM - 5:00 PM', match: 'Semi Final 2', venue: 'Badminton Court' }
-                ]
-            },
-            {
-                day: 'Day 3 (11/01/2026) - Final',
-                matches: [
-                    { time: '4:00 PM - 5:00 PM', match: 'Final', venue: 'Badminton Court' }
+                    { time: '12:30 Pm to 1:00 Pm', match: 'FINAL: Winner SF1 vs Winner SF2', venue: 'Court 1' }
                 ]
             }
         ]
     },
     {
-        id: 'badminton-girls',
+        id: 'zonal-badminton-girls',
         name: 'Badminton (Girls)',
         category: 'sports',
         icon: '🏸',
-        status: 'live',
-        gender: 'Girls',
-        venue: 'Badminton Court',
-        description: 'Smash and Drop.',
+        status: 'upcoming',
+        venue: 'GEC Buxar (Academic Badminton Court 2)',
+        image: '/EVENT PHOTO/BADMINTON.jpg',
+        description: 'Smash and Drop. Group A & B battles.',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Ritu Pandey', phone: '8521840199' },
-            { name: 'Khushi Kumari', phone: '7667298094' }
+            { name: 'Dr. Shailesh Kumar', phone: '7906209274', role: 'Faculty' },
+            { name: 'Md. Ahmad', phone: '9958470800', role: 'Faculty' },
+            { name: 'Abhishek Kumar', phone: '9155147615', role: 'Student (2K22)' },
+            { name: 'Divyank Pandey', phone: '7979976762', role: 'Student (2K22)' }
         ],
+        teams: ['GEC Buxar', 'GEC Bhojpur', 'GEC Kaimur', 'BCE Bakhtiyarpur', 'SEC Sasaram', 'NCE Chandi'],
         schedule: [
             {
-                day: 'Day 1 (09/01/2026)',
+                day: 'Day 1 (15 Jan 2026)',
                 matches: [
-                    { time: '7:00 AM - 8:00 AM', match: 'Team Ritu vs Team Roshani', venue: 'Badminton Court' },
-                    { time: '8:00 AM - 9:00 AM', match: 'Team Roshani vs Team Khushi', venue: 'Badminton Court' },
-                    { time: '9:00 AM - 10:00 AM', match: 'Team Ritu vs Team Khushi', venue: 'Badminton Court' }
+                    { time: '9:00 Am to 10:00 Am', match: 'GEC BUXAR VS GEC BHOJPUR', venue: 'Court 2' },
+                    { time: '10:00 Am to 11:00 Am', match: 'BCE BKP VS NCE CHANDI', venue: 'Court 2' },
+                    { time: '11:00 Am to 12:00 Pm', match: 'GEC BHOJPUR VS GEC KAIMUR', venue: 'Court 2' },
+                    { time: '12:00 Pm to 1:00 Pm', match: 'NCE CHANDI VS SEC SASARAM', venue: 'Court 2' },
+                    { time: '1:00 Pm to 2:00 Pm', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'Court 2' },
+                    { time: '2:00 Pm to 3:00 Pm', match: 'BCE BKP VS SEC SASARAM', venue: 'Court 2' }
                 ]
             },
             {
-                day: 'Day 2 (11/01/2026) - Final',
+                day: 'Day 2 (16 Jan 2026)',
                 matches: [
-                    { time: '10:00 AM - 10:45 AM', match: 'Final (Pos 1 vs Pos 2)', venue: 'Badminton Court' }
+                    { time: '9:00 Am to 10:00 Am', match: 'FINAL: Group A Topper vs Group B Topper', venue: 'Court 2' }
+                ]
+            }
+        ]
+    },
+
+    // --- CARROM ---
+    {
+        id: 'zonal-carrom-boys',
+        name: 'Carrom (Boys)',
+        category: 'sports',
+        icon: '🎯',
+        status: 'upcoming',
+        venue: 'G7 (Board 1 & 2)',
+        image: '/EVENT PHOTO/CARROM TOURNAMENT.jpg',
+        description: 'Strike and Pocket.',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Vijay Kumar', phone: '9304405557', role: 'Faculty' },
+            { name: 'Ankit Kumar', phone: '9931602713', role: 'Student' }
+        ],
+        teams: ['GEC Buxar', 'GEC Bhojpur', 'GEC Kaimur', 'BCE Bakhtiyarpur', 'SEC Sasaram', 'NCE Chandi'],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am - 9:30 Am', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'G7 (Board 1)' },
+                    { time: '9:00 Am - 9:30 Am', match: 'GEC BHOJPUR VS BCE BKP', venue: 'G7 (Board 2)' },
+                    { time: '9:40 Am - 10:10 Am', match: 'GEC KAIMUR VS NCE CHANDI', venue: 'G7 (Board 1)' },
+                    { time: '9:40 Am - 10:10 Am', match: 'BCE BKP VS SEC SASARAM', venue: 'G7 (Board 2)' }
+                ]
+            },
+            {
+                day: 'SF/Final (15 Jan 2026)',
+                matches: [
+                    { time: '11:30 Am - 12:00 Pm', match: 'Semfinals', venue: 'G7' },
+                    { time: '12:30 Pm - 1:00 Pm', match: 'FINAL', venue: 'G7' }
                 ]
             }
         ]
     },
     {
-        id: 'table-tennis-boys',
+        id: 'zonal-carrom-girls',
+        name: 'Carrom (Girls)',
+        category: 'sports',
+        icon: '🎯',
+        status: 'upcoming',
+        venue: 'G7 (Board 1 & 2)',
+        image: '/EVENT PHOTO/CARROM TOURNAMENT.jpg',
+        description: 'Strike and Pocket.',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Vijay Kumar', phone: '9304405557', role: 'Faculty' },
+            { name: 'Sushil Kumar', phone: '8544688394', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '2:20 Pm - 2:50 Pm', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'G7 (Board 1)' },
+                    { time: '2:20 Pm - 2:50 Pm', match: 'GEC BHOJPUR VS BCE BKP', venue: 'G7 (Board 2)' },
+                    { time: '3:00 Pm - 3:30 Pm', match: 'GEC KAIMUR VS NCE CHANDI', venue: 'G7 (Board 1)' },
+                    { time: '3:00 Pm - 3:30 Pm', match: 'BCE BKP VS SEC SASARAM', venue: 'G7 (Board 2)' }
+                ]
+            },
+            {
+                day: 'SF/Final (15 Jan 2026)',
+                matches: [
+                    { time: '4:30 Pm - 5:00 Pm', match: 'Semfinals', venue: 'G7' },
+                    { time: '5:20 Pm - 5:50 Pm', match: 'FINAL', venue: 'G7' }
+                ]
+            }
+        ]
+    },
+
+    // --- CHESS ---
+    {
+        id: 'zonal-chess',
+        name: 'Chess (Boys & Girls)',
+        category: 'sports',
+        icon: '♟️',
+        status: 'upcoming',
+        venue: 'G7 / Faculty Lounge',
+        image: '/EVENT PHOTO/CHESS.jpg',
+        description: 'Round-Robin format with 11 rounds.',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Abhishek Kumar', phone: '9155147615', role: 'Student' },
+            { name: 'Divyank Pandey', phone: '7979976762', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: 'All Day', match: '11 Rounds of Round Robin', venue: 'Assigned Boards' }
+                ]
+            }
+        ]
+    },
+
+    // --- CRICKET ---
+    {
+        id: 'zonal-cricket',
+        name: 'Cricket',
+        category: 'sports',
+        icon: '🏏',
+        status: 'upcoming',
+        venue: 'GEC Buxar Cricket Ground',
+        image: '/EVENT PHOTO/CRICKET.png',
+        description: 'Zonal Cricket Tournament',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Chandrabhanu Kumar', phone: '9110918152', role: 'Faculty' },
+            { name: 'Sushil Kumar', phone: '8544688394', role: 'Student' }
+        ],
+        teams: ['GEC Buxar', 'GEC Bhojpur', 'GEC Kaimur', 'BCE Bakhtiyarpur', 'SEC Sasaram', 'NCE Chandi'],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '8:00 Am - 9:30 Am', match: 'BCE BKP VS SEC SASARAM', venue: 'Cricket Ground' },
+                    { time: '9:45 Am - 11:15 Am', match: 'NCE CHANDI VS GEC KAIMUR', venue: 'Cricket Ground' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '8:00 Am - 9:30 Am', match: 'GEC BUXAR VS SEC SASARAM', venue: 'Cricket Ground' },
+                    { time: '9:45 Am - 11:15 Am', match: 'GEC BHOJPUR VS NCE CHANDI', venue: 'Cricket Ground' }
+                ]
+            },
+            {
+                day: 'Day 3 (17 Jan 2026)',
+                matches: [
+                    { time: '8:00 Am - 9:30 Am', match: 'GEC BUXAR VS BCE BKP', venue: 'Cricket Ground' },
+                    { time: '9:45 Am - 11:15 Am', match: 'GEC BHOJPUR VS GEC KAIMUR', venue: 'Cricket Ground' },
+                    { time: '1:00 Pm - 2:00 Pm', match: 'FINAL: Group A Winner vs Group B Winner', venue: 'Cricket Ground' }
+                ]
+            }
+        ]
+    },
+
+    // --- KABADDI ---
+    {
+        id: 'zonal-kabaddi-boys',
+        name: 'Kabaddi (Boys)',
+        category: 'sports',
+        icon: '🤼',
+        status: 'upcoming',
+        venue: 'GEC Buxar Kabaddi Court',
+        image: '/EVENT PHOTO/KABADDI.png',
+        description: 'Raid and Tackle',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Dr. Shailesh Kumar', phone: '7906209274', role: 'Faculty' },
+            { name: 'Divyank Pandey', phone: '7979976762', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'GEC BUXAR VS SEC SASARAM', venue: 'Kabaddi Court' },
+                    { time: '10:30 Am', match: 'BCE BKP VS GEC BHOJPUR', venue: 'Kabaddi Court' },
+                    { time: '12:00 Pm', match: 'GEC BUXAR VS BCE BKP', venue: 'Kabaddi Court' },
+                    { time: '2:00 Pm', match: 'GEC BHOJPUR VS NCE CHANDI', venue: 'Kabaddi Court' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'SEC SASARAM VS GEC KAIMUR', venue: 'Kabaddi Court' },
+                    { time: '11:00 Am', match: 'NCE CHANDI VS BCE BKP', venue: 'Kabaddi Court' }
+                ]
+            },
+            {
+                day: 'Day 3 (17 Jan 2026)',
+                matches: [
+                    { time: '10:00 Am', match: 'FINAL', venue: 'Kabaddi Court' }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'zonal-kabaddi-girls',
+        name: 'Kabaddi (Girls)',
+        category: 'sports',
+        icon: '🤼',
+        status: 'upcoming',
+        venue: 'GEC Buxar Kabaddi Court',
+        image: '/EVENT PHOTO/KABADDI.png',
+        description: 'Raid and Tackle',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
+        coordinators: [
+            { name: 'Vijay Kumar', phone: '9304405557', role: 'Faculty' },
+            { name: 'Abhishek Kumar', phone: '9155147615', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '3:00 Pm', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'Kabaddi Court' },
+                    { time: '4:00 Pm', match: 'BCE BKP VS GEC BHOJPUR', venue: 'Kabaddi Court' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '1:00 Pm', match: 'SEC SASARAM VS GEC KAIMUR', venue: 'Kabaddi Court' },
+                    { time: '2:00 Pm', match: 'NCE CHANDI VS GEC BHOJPUR', venue: 'Kabaddi Court' },
+                    { time: '3:00 Pm', match: 'GEC BUXAR VS SEC SASARAM', venue: 'Kabaddi Court' }
+                ]
+            },
+            {
+                day: 'Day 3 (17 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'FINAL', venue: 'Kabaddi Court' }
+                ]
+            }
+        ]
+    },
+
+    // --- TABLE TENNIS ---
+    {
+        id: 'zonal-tt-boys',
         name: 'Table Tennis (Boys)',
         category: 'sports',
         icon: '🏓',
-        status: 'live',
-        gender: 'Boys',
-        venue: 'Acad. Courtyard',
-        description: 'Fast-paced action.',
+        status: 'upcoming',
+        venue: 'GEC Buxar Academic TT Court',
+        image: '/EVENT PHOTO/TT.png',
+        description: 'Ping Pong Zonal',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Rahul Raj', phone: '6206848182' },
-            { name: 'Anmol Saran', phone: '7340134201' },
-            { name: 'Rupali Kumari', phone: '9471006391' },
-            { name: 'Aanya', phone: '9798595818' },
-            { name: 'Om Kumar', phone: '7970774219' }
+            { name: 'Ankit Kumar', phone: '9931602713', role: 'Student' }
         ],
         schedule: [
             {
-                day: 'Day 1 (08/01/2026)',
+                day: 'Day 1 (15 Jan 2026)',
                 matches: [
-                    { time: '2:00 PM - 2:45 PM', match: 'Team Rahul vs Team Om', venue: 'Acad. Courtyard' },
-                    { time: '2:45 PM - 3:30 PM', match: 'Team Anmol vs Team Akash', venue: 'Acad. Courtyard' },
-                    { time: '3:30 PM - 4:15 PM', match: 'Team Rahul vs Team Anshu', venue: 'Acad. Courtyard' },
-                    { time: '4:15 PM - 5:00 PM', match: 'Team Anmol vs Team Akash', venue: 'Acad. Courtyard' }
+                    { time: '12:30 Pm - 3:30 Pm', match: 'Group Matches', venue: 'TT Court' }
                 ]
             },
             {
-                day: 'Day 2 (09/01/2026)',
+                day: 'Day 2 (16 Jan 2026)',
                 matches: [
-                    { time: '10:00 AM - 10:45 AM', match: 'Team Anshu vs Team Om', venue: 'Acad. Courtyard' },
-                    { time: '10:45 AM - 11:30 AM', match: 'Team Anmol vs Team Ankit', venue: 'Acad. Courtyard' },
-                    { time: '12:00 PM - 12:45 PM', match: 'Semi Final 1', venue: 'Acad. Courtyard' },
-                    { time: '12:45 PM - 1:30 PM', match: 'Semi Final 2', venue: 'Acad. Courtyard' }
-                ]
-            },
-            {
-                day: 'Day 3 (11/01/2026)',
-                matches: [
-                    { time: '10:00 AM - 11:00 AM', match: 'Final', venue: 'Acad. Courtyard' }
+                    { time: '9:30 Am - 12:30 Pm', match: 'Group Matches', venue: 'TT Court' },
+                    { time: '2:30 PM', match: 'FINAL', venue: 'TT Court' }
                 ]
             }
         ]
     },
     {
-        id: 'table-tennis-girls',
+        id: 'zonal-tt-girls',
         name: 'Table Tennis (Girls)',
         category: 'sports',
         icon: '🏓',
-        status: 'live',
-        gender: 'Girls',
-        venue: 'Acad. Courtyard',
-        description: 'Fast-paced action.',
+        status: 'upcoming',
+        venue: 'GEC Buxar Academic TT Court',
+        image: '/EVENT PHOTO/TT.png',
+        description: 'Ping Pong Zonal',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Rupali Kumari', phone: '9471006391' },
-            { name: 'Aanya', phone: '9798595818' }
+            { name: 'Sushil Kumar', phone: '8544688394', role: 'Student' }
         ],
         schedule: [
             {
-                day: 'Day 1 (08/01/2026)',
+                day: 'Day 1 (15 Jan 2026)',
                 matches: [
-                    { time: '2:00 PM - 2:45 PM', match: 'Team Arushi vs Team Aanya (Final)', venue: 'Acad. Courtyard' }
+                    { time: '10:00 Am - 11:00 Am', match: 'GEC BUXAR VS SEC SASARAM', venue: 'TT Court' },
+                    { time: '11:00 Am - 12:00 Pm', match: 'BCE BKP VS NCE CHANDI', venue: 'TT Court' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '10:00 Am - 12:00 Pm', match: 'Group Matches', venue: 'TT Court' },
+                    { time: '4:00 PM', match: 'FINAL', venue: 'TT Court' }
                 ]
             }
         ]
-    },
-    {
-        id: 'kabaddi',
-        name: 'Kabaddi',
-        category: 'sports',
-        icon: '🤼',
-        status: 'live',
-        gender: 'Boys',
-        venue: 'Kabaddi Ground',
-        description: 'Raid and Tackle.',
-        coordinators: [
-            { name: 'Harsh Gautam', phone: '6299113695' },
-            { name: 'Ashwani', phone: '9631423152' },
-            { name: 'Prithvi Raj Chauhan', phone: '9570617064' },
-            { name: 'Ritu Pandey', phone: '8521840199' },
-            { name: 'Radhika Kumari', phone: '9102781480' }
-        ],
-        schedule: [
-            {
-                day: 'Day 1',
-                matches: [
-                    { time: 'TBA', match: 'Team Prithvi vs Team Aditya', venue: 'Kabaddi Ground' },
-                    { time: 'TBA', match: 'Team Ashwani vs Team Tej', venue: 'Kabaddi Ground' },
-                    { time: 'TBA', match: 'Team Prithvi vs Team Ashwani', venue: 'Kabaddi Ground' }
-                ]
-            },
-            {
-                day: 'Day 2',
-                matches: [
-                    { time: 'TBA', match: 'Team Aditya vs Team Tej', venue: 'Kabaddi Ground' },
-                    { time: 'TBA', match: 'Team Prithvi vs Team Tej', venue: 'Kabaddi Ground' },
-                    { time: 'TBA', match: 'Team Ashwani vs Team Aditya', venue: 'Kabaddi Ground' }
-                ]
-            },
-            {
-                day: 'Day 3',
-                matches: [
-                    { time: 'TBA', match: 'Final', venue: 'Kabaddi Ground' }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'carrom',
-        name: 'Carrom',
-        category: 'sports',
-        icon: '🎯',
-        status: 'live',
-        gender: 'Mixed',
-        venue: 'Common Room',
-        description: 'Strike and Pocket.',
-        coordinators: [
-            { name: 'Manish Kumar', phone: '9508868648' },
-            { name: 'Akash Shrivashtav', phone: '8210983047' },
-            { name: 'Rahul Parsad', phone: '8252088322' },
-            { name: 'Mohammad Abaan', phone: '9508608840' },
-            { name: 'Khushi Raj', phone: '9471208833' },
-            { name: 'Anjali Kumari', phone: '9693509893' }
-        ]
-    },
-    {
-        id: 'chess',
-        name: 'Chess',
-        category: 'sports',
-        icon: '♟️',
-        status: 'live',
-        gender: 'Mixed',
-        venue: 'Library Hall',
-        description: 'Checkmate.',
-        coordinators: [
-            { name: 'Anurag Kumar', phone: '8271289284' },
-            { name: 'Satyam Kumar', phone: '9341526497' },
-            { name: 'Kalpana Kumari', phone: '7033911381' },
-            { name: 'Khushi Raj', phone: '9229109738' }
-        ]
-    },
-    {
-        id: 'athletics-jumps',
-        name: 'Long Jump & High Jump',
-        category: 'sports',
-        icon: '🏃',
-        status: 'live',
-        gender: 'Mixed',
-        venue: 'Athletics Ground',
-        description: 'Jump higher, jump longer.',
-        coordinators: [
-            { name: 'Sushant Kumar', phone: '7903077943' },
-            { name: 'Prince Raj', phone: '9031099637' },
-            { name: 'Kishan Harsh Raj', phone: '9905335322' },
-            { name: 'Sahil Kumar', phone: '7667477691' },
-            { name: 'Anushka Yadav', phone: '7903965726' },
-            { name: 'Juhi Pandey', phone: '9939763464' }
-        ]
-    },
-    {
-        id: 'athletics-track',
-        name: 'Track Events (Sprints)',
-        category: 'sports',
-        icon: '🏃💨',
-        status: 'live',
-        gender: 'Mixed',
-        venue: 'Athletics Ground',
-        description: '100M, 200M, 400M races.',
-        coordinators: [
-            { name: 'Sushant Kumar', phone: '7903077943' },
-            { name: 'Prince Raj', phone: '9031099637' }
-        ],
-        results: [
-            {
-                title: '100M Sprint (Boys) - Round 1',
-                winners: [
-                    { position: 1, name: 'Vaibhav Kumar (25CS64)' },
-                    { position: 2, name: 'Aditya Gupta (04CS52)' }
-                ]
-            },
-            {
-                title: '100M Sprint (Girls) - Final',
-                winners: [
-                    { position: 1, name: 'Sonali' },
-                    { position: 2, name: 'Anwardha' }
-                ]
-            },
-            {
-                title: '200M Sprint (Girls) - Round 1',
-                winners: [
-                    { position: 1, name: 'Sonali Bharti' },
-                    { position: 2, name: 'Aashika Yadav' }
-                ]
-            },
-            {
-                title: '200M Sprint (Girls) - Round 1 (Heat 2)',
-                winners: [
-                    { position: 1, name: 'Anshika Raj' },
-                    { position: 2, name: 'Annu Kumari' }
-                ]
-            }
-        ],
-        scorecard: '/scorecards/100_m_sprint_score_sheet.pdf'
-    },
-    {
-        id: 'athletics-throws',
-        name: 'Javelin, Shot Put, Discus',
-        category: 'sports',
-        icon: '💪',
-        status: 'completed',
-        gender: 'Mixed',
-        venue: 'Athletics Ground',
-        description: 'Test of power and technique.',
-        coordinators: [
-            { name: 'Sushil Kumar', phone: '8544688394' },
-            { name: 'Ankit Kumar', phone: '8292574286' },
-            { name: 'Anmol Sharan', phone: '7340134201' },
-            { name: 'Rekha Kumari', phone: '7765911682' },
-            { name: 'Sapna Kumari', phone: '9122135574' }
-        ],
-        results: [
-            {
-                title: 'Javelin Throw (Boys) - Final',
-                winners: [
-                    { position: 1, name: 'Chandra Prakash (24CS04)' },
-                    { position: 2, name: 'Nikhil' }
-                ]
-            }
-        ],
-        scorecard: '/scorecards/Javelin_score_sheet_boys.pdf'
     },
 
-    // --- CULTURAL ---
+    // --- VOLLEYBALL ---
     {
-        id: 'essay-writing',
-        name: 'Essay Writing',
-        category: 'cultural',
-        icon: '📝',
+        id: 'zonal-volleyball-boys',
+        name: 'Volleyball (Boys)',
+        category: 'sports',
+        icon: '🏐',
         status: 'upcoming',
-        gender: 'Mixed',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: '11:00 AM onwards',
-        date: '10/01/2026',
-        venue: 'Faculty Lounge',
-        description: 'Express your thoughts through writing.',
+        venue: 'GEC Buxar Academic Ground',
+        image: '/EVENT PHOTO/VOLLEYBALL.png',
+        description: 'Spike and Block',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Subish', batch: '2K22', branch: 'EE' },
-            { name: 'Ankit Kumar', batch: '2K23', branch: 'CSE' },
-            { name: 'Aditya Prakash', batch: '2K23', branch: 'CIVIL' }
+            { name: 'Divyank Pandey', phone: '7979976762', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'GEC BUXAR VS GEC KAIMUR', venue: 'VB Court' },
+                    { time: '11:00 Am', match: 'GEC BHOJPUR VS SEC SASARAM', venue: 'VB Court' },
+                    { time: '2:00 Pm', match: 'NCE CHANDI VS BCE BKP', venue: 'VB Court' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'NCE CHANDI VS SEC SASARAM', venue: 'VB Court' }
+                ]
+            },
+            {
+                day: 'Final (17 Jan 2026)',
+                matches: [
+                    { time: '11:00 Am', match: 'FINAL: Top Group A vs Top Group B', venue: 'VB Court' }
+                ]
+            }
         ]
     },
     {
-        id: 'story-writing',
-        name: 'Story Writing',
-        category: 'cultural',
-        icon: '✍️',
+        id: 'zonal-volleyball-girls',
+        name: 'Volleyball (Girls)',
+        category: 'sports',
+        icon: '🏐',
         status: 'upcoming',
-        gender: 'Mixed',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: '11:00 AM onwards',
-        date: '10/01/2026',
-        venue: 'Faculty Lounge',
-        description: 'Weave a compelling story.',
+        venue: 'GEC Buxar Academic Ground',
+        image: '/EVENT PHOTO/VOLLEYBALL.png',
+        description: 'Spike and Block',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Subish', batch: '2K22', branch: 'EE' },
-            { name: 'Aditya Ranjan', batch: '2K23', branch: 'ECE' },
-            { name: 'Nitesh Kumar', batch: '2K23', branch: 'ECE' }
+            { name: 'Abhishek Kumar', phone: '9155147615', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'GEC BHOJPUR VS GEC BUXAR', venue: 'VB Court' },
+                    { time: '11:00 Am', match: 'BCE BKP VS SEC SASARAM', venue: 'VB Court' },
+                    { time: '2:00 Pm', match: 'GEC BHOJPUR VS GEC KAIMUR', venue: 'VB Court' }
+                ]
+            },
+            {
+                day: 'Final (17 Jan 2026)',
+                matches: [
+                    { time: '9:00 Am', match: 'FINAL: Top Group A vs Top Group B', venue: 'VB Court' }
+                ]
+            }
         ]
     },
+
+    // --- ATHLETICS ---
     {
-        id: 'group-discussion',
-        name: 'Group Discussion',
-        category: 'cultural',
-        icon: '🗣️',
+        id: 'zonal-athletics',
+        name: 'Athletics (Boys & Girls)',
+        category: 'sports',
+        icon: '🏃',
         status: 'upcoming',
-        gender: 'Mixed',
-        gender: 'Mixed',
-        timing: '3:00 PM – 6:00 PM',
-        date: '10/01/2026',
-        venue: 'Faculty Lounge',
-        description: 'Debate and discuss current topics.',
+        venue: 'GEC Buxar Cricket Ground',
+        image: '/EVENT PHOTO/ATHELITUCS.png',
+        description: 'Sprints, Jumps, Throws',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Tanuja', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Azad', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Khushi Raj', batch: '2K23', branch: 'CSE' }
+            { name: 'Sushil Kumar', phone: '8544688394', role: 'Student' },
+            { name: 'Ankit Kumar', phone: '9931602713', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026) - Qualifiers & Throws',
+                matches: [
+                    { time: '10:00 AM', match: '100m (Boys/Girls)', venue: 'Cricket Ground' },
+                    { time: '1:00 PM', match: '200m (Boys/Girls)', venue: 'Cricket Ground' },
+                    { time: '3:00 PM', match: '400m (Boys/Girls)', venue: 'Cricket Ground' },
+                    { time: '2:00 PM - 4:00 PM', match: 'Shot Put & Discus', venue: 'Cricket Ground' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026) - Finals & Jumps',
+                matches: [
+                    { time: 'Morning', match: '100m/200m/400m Finals', venue: 'Cricket Ground' },
+                    { time: '2:00 PM', match: 'High Jump & Long Jump', venue: 'Cricket Ground' },
+                    { time: '2:00 PM', match: 'Javelin', venue: 'Cricket Ground' }
+                ]
+            },
+            {
+                day: 'Day 3 (17 Jan 2026) - Relays',
+                matches: [
+                    { time: '9:00 AM - 1:00 PM', match: '4x100m & 4x400m Relay', venue: 'Cricket Ground' }
+                ]
+            }
         ]
     },
+
+    // --- CULTURAL EVENTS ---
     {
-        id: 'debate',
-        name: 'Debate Competition',
-        category: 'cultural',
-        icon: '🎙️',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: '3:00 PM – 6:00 PM',
-        date: '11/01/2026',
-        venue: 'Auditorium',
-        description: 'Verbal battle of logic and rhetoric.',
-        coordinators: [
-            { name: 'Tanuja', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Azad', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Ankit Kumar', batch: '2K23', branch: 'CSE' }
-        ]
-    },
-    {
-        id: 'dumb-charades',
-        name: 'Dumb Charades',
+        id: 'zonal-cultural',
+        name: 'Literary & Cultural Events',
         category: 'cultural',
         icon: '🎭',
         status: 'upcoming',
-        gender: 'Mixed',
-        timing: '2:30 PM - 4:30 PM',
-        date: '11/01/2026',
-        venue: 'Auditorium',
-        description: 'Act it out!',
+        venue: 'Auditorium / Academic Building',
+        image: '/EVENT PHOTO/POSTER.png',
+        description: 'Debate, Painting, Singing, Quiz & more',
+        rulebook: '/RULEBOOK/UMANG\'25 GEC BUXAR BROUCHER.pdf',
         coordinators: [
-            { name: 'Aditya Gupta', batch: '2K22', branch: 'ECE' },
-            { name: 'Rounak Kumar', batch: '2K22', branch: 'EE' },
-            { name: 'Avantika', batch: '2K23', branch: 'CSE' }
-        ]
-    },
-    {
-        id: 'singing',
-        name: 'Singing Competition',
-        category: 'cultural',
-        icon: '🎤',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: 'To Be Announced',
-        date: '11/01/2026',
-        venue: 'Auditorium',
-        description: 'Solo and Duet performances.',
-        coordinators: [
-            { name: 'Kunal', batch: '2K22', branch: 'ECE' },
-            { name: 'Rajiv', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Ranvir', batch: '2K23', branch: 'CIVIL' },
-            { name: 'Khusi Singh', batch: '2K23', branch: 'CSE' }
-        ]
-    },
-    {
-        id: 'painting',
-        name: 'Painting Competition',
-        category: 'cultural',
-        icon: '🎨',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: '11:00 AM - 2:00 PM',
-        date: '11/01/2026',
-        venue: 'Faculty Lounge / Room 210',
-        description: 'Express through colors.',
-        coordinators: [
-            { name: 'Sneha', batch: '2K22', branch: 'EE' },
-            { name: 'Vidya', batch: '2K22', branch: 'EE' },
-            { name: 'Ankita', batch: '2K23', branch: 'CIVIL' }
-        ]
-    },
-    {
-        id: 'extempore',
-        name: 'Extempore',
-        category: 'cultural',
-        icon: '⏱️',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: 'From 6:00 PM onwards',
-        date: '11/01/2026',
-        venue: 'Auditorium',
-        description: 'Spontaneous speaking skills.',
-        coordinators: [
-            { name: 'Subish', batch: '2K22', branch: 'EE' },
-            { name: 'Raj Kumar', batch: '2K23', branch: 'EE' },
-            { name: 'Rajiv', batch: '2K22', branch: 'CIVIL' }
-        ]
-    },
-    {
-        id: 'quiz',
-        name: 'Quiz Competition',
-        category: 'cultural',
-        icon: '❓',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: '11:00 AM onwards',
-        date: '11/01/2026',
-        venue: 'Seminar Hall',
-        description: 'Test of general knowledge.',
-        coordinators: [
-            { name: 'Muskan', batch: '2K22', branch: 'EE' },
-            { name: 'Ankit Kumar', batch: '2K23', branch: 'CSE' },
-            { name: 'Utkarsh Sharma', batch: '2K23', branch: 'CIVIL' }
-        ]
-    },
-    {
-        id: 'poster-making',
-        name: 'Poster Making',
-        category: 'cultural',
-        icon: '🖼️',
-        status: 'upcoming',
-        gender: 'Mixed',
-        timing: 'To Be Announced',
-        date: '11/01/2026',
-        venue: 'Faculty Lounge',
-        description: 'Visual communication art.',
-        coordinators: [
-            { name: 'Hemant Mukhiya', batch: '2K22', branch: 'CIVIL' },
-            { name: 'Pragati Raj', batch: '2K22', branch: 'ECE' },
-            { name: 'Vishal Kumar', batch: '2K23', branch: 'CSE' }
+            { name: 'Aditya Gupta', phone: '7004052302', role: 'Student Head' },
+            { name: 'Rounak Kumar', phone: '6201758723', role: 'Student' }
+        ],
+        schedule: [
+            {
+                day: 'Day 1 (15 Jan 2026)',
+                matches: [
+                    { time: '10:00 AM - 11:00 AM', match: 'Essay Writing', venue: 'Room 102' },
+                    { time: '10:30 AM - 12:00 PM', match: 'Poster Making', venue: 'Faculty Lounge' },
+                    { time: '11:00 AM - 12:00 PM', match: 'Story Writing', venue: 'Room 102' },
+                    { time: '2:00 PM - 3:30 PM', match: 'Group Discussion', venue: 'Auditorium' },
+                    { time: '3:30 PM - 4:30 PM', match: 'Extempore', venue: 'Auditorium' },
+                    { time: '4:30 PM - 7:30 PM', match: 'Dumb Charades', venue: 'Auditorium' }
+                ]
+            },
+            {
+                day: 'Day 2 (16 Jan 2026)',
+                matches: [
+                    { time: '10:30 AM - 1:30 PM', match: 'Painting Competition', venue: 'Room 211' },
+                    { time: '11:00 AM - 12:30 PM', match: 'Quiz Competition', venue: 'Faculty Lounge' },
+                    { time: '2:00 PM - 3:30 PM', match: 'Debate Competition', venue: 'Auditorium' },
+                    { time: '7:00 PM - 9:00 PM', match: 'Singing Competition', venue: 'Auditorium' }
+                ]
+            }
         ]
     }
 ];
+
+// --- INTRA COLLEGE EVENTS (Completed) ---
+export const intraEvents = [
+    // --- LITERARY & CULTURAL ---
+    {
+        name: 'Essay Writing (Hindi)',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sneha Kumari' },
+            { position: '🥈 Runner-up', name: 'Biru Kumar' }
+        ]
+    },
+    {
+        name: 'Essay Writing (English)',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Shreya Sinha' },
+            { position: '🥈 Runner-up', name: 'Ritik Kumar' }
+        ]
+    },
+    {
+        name: 'Story Writing (Hindi)',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Anjali Kumari' },
+            { position: '🥈 Runner-up', name: 'Jaya Pandey' }
+        ]
+    },
+    {
+        name: 'Story Writing (English)',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Amanjeet Kr.' },
+            { position: '🥈 Runner-up', name: 'Swarnim Sharan' }
+        ]
+    },
+    {
+        name: 'Group Discussion',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Piyush Maubey' },
+            { position: '🥈 Runner-up', name: 'Brishal' }
+        ]
+    },
+    {
+        name: 'Debate Competition',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Piyush Pathak' },
+            { position: '🥈 Runner-up', name: 'Vishal Kumar' }
+        ]
+    },
+    {
+        name: 'Dumb Charade',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Prem Kumar & Amit' },
+            { position: '🥈 Runner-up', name: 'Aditya Gupta & Raman Kumar' }
+        ]
+    },
+    {
+        name: 'Singing Competition',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Udit Narayan' },
+            { position: '🥈 Runner-up', name: 'Ranveer Kumar' }
+        ]
+    },
+    {
+        name: 'Painting Competition',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Shivani Kumari' },
+            { position: '🥈 Runner-up', name: 'Raman Kumar' }
+        ]
+    },
+    {
+        name: 'Extempore',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Piyush Pathak' },
+            { position: '🥈 Runner-up', name: 'Aditya Tiwari' }
+        ]
+    },
+    {
+        name: 'Quiz Competition',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Ritik (24C70LE)' },
+            { position: '🥈 Runner-up', name: 'Vikash (24M18)' }
+        ]
+    },
+    {
+        name: 'Poster Making Competition',
+        category: 'cultural',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Aman Kumar Happy' },
+            { position: '🥈 Runner-up', name: 'Prem Golden' }
+        ]
+    },
+
+    // --- ATHLETICS ---
+    {
+        name: 'Javelin Throw (Female)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Rekha Kumari (23CS20) – 15 m' },
+            { position: '🥈 Runner-up', name: 'Annu Kumari (25CS09) – 10.06 m' }
+        ]
+    },
+    {
+        name: 'Javelin Throw (Male)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Chandra Prakash (24CS04) – 36.78 m' },
+            { position: '🥈 Runner-up', name: 'Nikhil Sharma (24CS19) – 32.82 m' }
+        ]
+    },
+    {
+        name: 'Shot Put (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Pratibha Kumari (25EE23)' },
+            { position: '🥈 Runner-up', name: 'Ritu Pandey (23CS30)' }
+        ]
+    },
+    {
+        name: 'Shot Put (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Chandra Prakash (24CS04)' },
+            { position: '🥈 Runner-up', name: 'Nikhil Kumar (24CS44)' }
+        ]
+    },
+    {
+        name: 'Discuss Throw (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sapna Kumari (24C28)' },
+            { position: '🥈 Runner-up', name: 'Rekha Kumari (23CS20)' }
+        ]
+    },
+    {
+        name: 'Discuss Throw (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Chandra Prakash (24CS04)' },
+            { position: '🥈 Runner-up', name: 'Nikhil (24CS44)' }
+        ]
+    },
+    {
+        name: 'High Jump (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sapna Kumari' },
+            { position: '🥈 Runner-up', name: 'Sonali Bharti' }
+        ]
+    },
+    {
+        name: 'High Jump (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sujal Singh' },
+            { position: '🥈 Runner-up', name: 'Ranjeet Kumar' }
+        ]
+    },
+    {
+        name: 'Long Jump (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Ashika Yadav' },
+            { position: '🥈 Runner-up', name: 'Sapna Kumari' }
+        ]
+    },
+    {
+        name: 'Long Jump (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sujal Singh' },
+            { position: '🥈 Runner-up', name: 'Faizan' }
+        ]
+    },
+    {
+        name: '100m Sprint (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sonali Bharti' },
+            { position: '🥈 Runner-up', name: 'Anuradha Kumari' }
+        ]
+    },
+    {
+        name: '100m Sprint (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Faizan Raza Khan' },
+            { position: '🥈 Runner-up', name: 'Sujal Singh' }
+        ]
+    },
+    {
+        name: '200m Sprint (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sonali Bharti' },
+            { position: '🥈 Runner-up', name: 'Ashika Yadav' }
+        ]
+    },
+    {
+        name: '200m Sprint (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Faizan Raza Khan' },
+            { position: '🥈 Runner-up', name: 'Prince Rajput' }
+        ]
+    },
+    {
+        name: '400m Sprint (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Sonali Bharti' },
+            { position: '🥈 Runner-up', name: 'Pratibha Kumari' }
+        ]
+    },
+    {
+        name: '400m Sprint (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Navneet Kumar' },
+            { position: '🥈 Runner-up', name: 'Prince Kumar' }
+        ]
+    },
+    {
+        name: '4×100 Relay (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Team: Rekha Kumari (C), Ashika Yadav, Sapna Kumari, Annu Kumari' },
+            { position: '🥈 Runner-up', name: 'Team: Vidya Kumari (C), Komal Kumari, Shivani Kumari, Aropita Kumari' }
+        ]
+    },
+    {
+        name: '4×400 Relay (Girls)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Komal Kumari (C), Aropita Kumari, Shivani Kumari, Vidya Kumari' },
+            { position: '🥈 Runner-up', name: 'Rishika Raj, Pratibha Kumari, Anshu Kumari, Annu Kumari' }
+        ]
+    },
+    {
+        name: '4×100 Relay (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Faizan Raza Khan, Kishan Prash Rai, Ravi Raj' },
+            { position: '🥈 Runner-up', name: 'Ramesh Kumar, Aditya Gupta, Gautam Kumar' }
+        ]
+    },
+    {
+        name: '4×400 Relay (Boys)',
+        category: 'sports',
+        subcategory: 'Athletics',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Aditya Gupta, Shekhar Kumar, Nikhil Kumar, Ranjeet Kumar' },
+            { position: '🥈 Runner-up', name: 'Navneet Kumar, Ashutosh Kumar, Ajay Rana, Prince Kumar' }
+        ]
+    },
+
+    // --- INDIVIDUAL GAMES ---
+    {
+        name: 'Carrom (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Abhishek Kumar' },
+            { position: '🥈 Runner-up', name: 'Sahil Kumar' }
+        ]
+    },
+    {
+        name: 'Carrom (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Anjali Kumari' },
+            { position: '🥈 Runner-up', name: 'Pragya Kumari' }
+        ]
+    },
+    {
+        name: 'Chess (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Anjali Kumari Shukla' },
+            { position: '🥈 Runner-up', name: 'Deepanjali Devi' }
+        ]
+    },
+    {
+        name: 'Chess (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Pranav R Prakash' },
+            { position: '🥈 Runner-up', name: 'Dev Raj' }
+        ]
+    },
+
+    // --- TEAM SPORTS ---
+    {
+        name: 'Volleyball (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Rising Falcon (Capt: Amit Kumar)' },
+            { position: '🥈 Runner-up', name: 'Court Pushers (Capt: Anurag Kumar)' }
+        ]
+    },
+    {
+        name: 'Volleyball (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Team Captain: Khusi Kumar' },
+            { position: '🥈 Runner-up', name: 'Team Captain: Sapna Kumari' }
+        ]
+    },
+    {
+        name: 'Badminton (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Team B (Capt: Prabhat Kr. Singh)' },
+            { position: '🥈 Runner-up', name: 'Team A (Capt: Md. Amir)' }
+        ]
+    },
+    {
+        name: 'Badminton (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Team A (Capt: Ritu Pandey)' },
+            { position: '🥈 Runner-up', name: 'Team C (Capt: Khusi Kumar)' }
+        ]
+    },
+    {
+        name: 'Table Tennis (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Captain: Aanya' },
+            { position: '🥈 Runner-up', name: 'Captain: Aushi Thakur' }
+        ]
+    },
+    {
+        name: 'Table Tennis (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: 'Info', name: 'Not filled in document' }
+        ]
+    },
+    {
+        name: 'Kabaddi (Boys)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Dabang Warriors (Capt: Pritvi Raj Chauhan)' },
+            { position: '🥈 Runner-up', name: 'Baghi Bulls (Capt: Aditya Pandey)' }
+        ]
+    },
+    {
+        name: 'Kabaddi (Girls)',
+        category: 'sports',
+        status: 'completed',
+        winners: [
+            { position: '🥇 Winner', name: 'Team Captain: Sushma Kumari' },
+            { position: '🥈 Runner-up', name: 'Team Captain: Ritu Pandey' }
+        ]
+    }
+];
+
+export const eventsData = []; 

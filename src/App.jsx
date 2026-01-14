@@ -31,7 +31,7 @@ function App() {
         <div className="flex flex-col min-h-screen relative overflow-hidden selection:bg-brand-orange/30">
           <FestivalBackground /> {/* Added Festival Themed Background */}
           <ClickSpark />
-          <AnnouncementBanner /> {/* Global Announcement */}
+
           <Navbar />
           <main className="flex-grow z-10 relative"> {/* Ensure content is above background */}
             <Routes>

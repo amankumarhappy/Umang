@@ -1,100 +1,42 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
-    const location = useLocation();
-
-    const toggleMenu = () => setIsOpen(!isOpen);
 
     // Pass the event to toggleTheme to enable the coordinate-based animation
     const handleThemeToggle = (e) => {
         toggleTheme(e);
     };
 
-    const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Sports', path: '/sports' },
-        { name: 'Cultural', path: '/cultural' },
-        { name: 'Teams', path: '/teams' },
-    ];
-
     return (
-        <nav className="fixed top-0 w-full z-50 bg-white/90 dark:bg-brand-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <nav className="fixed top-0 w-full z-50 bg-white/80 dark:bg-brand-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center">
-                        <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-orange">
+                    {/* Logo (Centered or Left aligned - Request said 'Remove Home Sports...' implying simplified) */}
+                    <Link to="/" className="flex items-center gap-2 group">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-orange to-red-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-110 transition-transform">
+                            U
+                        </div>
+                        <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-gray-300 tracking-tight">
                             UMANG 2026
                         </span>
                     </Link>
 
-                    {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.path}
-                                className={`text-sm font-medium transition-colors hover:text-brand-blue ${location.pathname === link.path ? 'text-brand-blue font-bold' : 'text-gray-600 dark:text-gray-300'
-                                    }`}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
+                    {/* Actions - Just Theme Toggle now */}
+                    <div className="flex items-center gap-4">
                         <button
                             onClick={handleThemeToggle}
-                            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition text-brand-orange"
                             aria-label="Toggle Theme"
                         >
-                            {theme === 'dark' ? <Sun size={20} className="text-brand-orange" /> : <Moon size={20} className="text-brand-blue" />}
-                        </button>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <div className="flex md:hidden items-center gap-4">
-                        <button
-                            onClick={handleThemeToggle}
-                            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
-                        >
-                            {theme === 'dark' ? <Sun size={20} className="text-brand-orange" /> : <Moon size={20} className="text-brand-blue" />}
-                        </button>
-                        <button onClick={toggleMenu} className="p-2 text-gray-800 dark:text-white" aria-label="Menu">
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
+                            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} className="text-brand-blue" />}
                         </button>
                     </div>
                 </div>
             </div>
-
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800 overflow-hidden"
-                    >
-                        <div className="px-4 py-4 flex flex-col gap-4">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    to={link.path}
-                                    onClick={() => setIsOpen(false)}
-                                    className={`text-lg font-medium py-2 border-b border-gray-100 dark:border-gray-800 ${location.pathname === link.path ? 'text-brand-blue' : 'text-gray-800 dark:text-gray-200'
-                                        }`}
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </nav>
     );
 };

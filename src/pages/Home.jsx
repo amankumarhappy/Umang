@@ -1,222 +1,507 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, ArrowRight, Activity, Music, Trophy, Phone, User } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { eventsData, FESTIVAL_DETAILS } from '../data/events';
-import Contact from '../components/home/Contact';
-import SpinWheel from '../components/game/SpinWheel';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, Trophy, Calendar, ExternalLink, Download, MapPin, Activity, Music, Swords, Clock, User, ChevronDown, ChevronUp } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
+import { intraEvents, zonalEvents } from '../data/events';
+import ParticipatingColleges from '../components/home/ParticipatingColleges';
+import WinnerList from '../components/home/WinnerList';
 
 const Home = () => {
-    const [displayState, setDisplayState] = useState('countdown'); // countdown or live
-    const [timeLeft, setTimeLeft] = useState({
-        days: '00', hours: '00', minutes: '00', seconds: '00'
-    });
-    const [currentDay, setCurrentDay] = useState('');
+    const [view, setView] = useState('landing');
+    const [eventStatus, setEventStatus] = useState('Upcoming');
+
+    const location = useLocation();
+
+    const handleBack = () => setView('landing');
 
     useEffect(() => {
-        const startDate = new Date("2026-01-10T09:00:00").getTime();
+        const params = new URLSearchParams(location.search);
+        const requestedView = params.get('view');
+        if (requestedView && ['landing', 'intra', 'zonal'].includes(requestedView)) {
+            setView(requestedView);
+        }
+    }, [location.search]);
 
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = startDate - now;
+    useEffect(() => {
+        const checkStatus = () => {
+            const now = new Date();
+            const day1Start = new Date("2026-01-15T09:00:00");
+            const day2Start = new Date("2026-01-16T09:00:00");
+            const day3Start = new Date("2026-01-17T09:00:00");
+            const eventEnd = new Date("2026-01-18T00:00:00");
 
-            if (distance < 0) {
-                setDisplayState('live');
-                // Simple logic to determine "Day X"
-                const daysPassed = Math.floor(Math.abs(distance) / (1000 * 60 * 60 * 24)) + 1;
-                setCurrentDay(`Day ${daysPassed} • ${new Date().toLocaleDateString('en-GB')}`);
+            if (now >= eventEnd) {
+                setEventStatus('Zonal End');
+            } else if (now >= day3Start) {
+                setEventStatus('Day 3 Zonal Live');
+            } else if (now >= day2Start) {
+                setEventStatus('Day 2 Zonal Live');
+            } else if (now >= day1Start) {
+                setEventStatus('Day 1 Zonal Live');
             } else {
-                setDisplayState('countdown');
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                setTimeLeft({
-                    days: days < 10 ? `0${days}` : days,
-                    hours: hours < 10 ? `0${hours}` : hours,
-                    minutes: minutes < 10 ? `0${minutes}` : minutes,
-                    seconds: seconds < 10 ? `0${seconds}` : seconds
-                });
+                setEventStatus('Upcoming');
             }
-        }, 1000);
+        };
 
-        return () => clearInterval(timer);
+        checkStatus();
+        const interval = setInterval(checkStatus, 60000);
+        return () => clearInterval(interval);
     }, []);
 
-    // Get live events or fallback to specific upcoming ones
-    const activeEvents = eventsData.filter(e => e.status === 'live');
-    const displayEvents = activeEvents.length > 0
-        ? activeEvents
-        : eventsData.filter(e => ['cricket', 'volleyball-boys', 'football'].includes(e.id));
+    // --- LANDING VIEW ---
+    const LandingView = () => {
+        const videoRef = React.useRef(null);
+        const [isPlaying, setIsPlaying] = useState(true);
+        const [isMuted, setIsMuted] = useState(true);
 
-    return (
-        <div className="pt-24 pb-20 px-4">
-            {/* Hero Section */}
-            <header className="text-center max-w-4xl mx-auto mb-16">
-                <span className="inline-block py-1 px-3 rounded-full bg-brand-blue/10 text-brand-blue dark:text-blue-400 text-sm font-semibold mb-4 border border-brand-blue/20">
-                    Organized by DSTTE, Bihar
-                </span>
+        const togglePlay = () => {
+            if (videoRef.current) {
+                if (isPlaying) videoRef.current.pause();
+                else videoRef.current.play();
+                setIsPlaying(!isPlaying);
+            }
+        };
 
-                {displayState === 'live' ? (
-                    <div className="mb-8">
-                        <h1 className="text-5xl md:text-7xl font-extrabold mb-2 tracking-tight text-slate-900 dark:text-white">
-                            {currentDay}
-                        </h1>
-                        <p className="text-xl text-brand-orange font-bold">UMANG 2026 IS LIVE!</p>
+        const toggleMute = () => {
+            if (videoRef.current) {
+                videoRef.current.muted = !isMuted;
+                setIsMuted(!isMuted);
+            }
+        };
+
+        return (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="min-h-screen pt-16 flex flex-col relative overflow-hidden"
+            >
+                {/* Hero Section with Video Background - Full Mobile Height */}
+                <div className="relative w-full h-[100svh] min-h-[600px] flex flex-col justify-center items-center px-4 overflow-hidden group">
+
+                    {/* Video Background */}
+                    <div className="absolute inset-0 z-0">
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover object-center scale-105 group-hover:scale-100 transition-transform duration-[2000ms]"
+                        >
+                            <source src="/Video/video.mp4" type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                        {/* Overlay Gradient - Stronger on mobile for readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-slate-900/40" />
+                        <div className="absolute inset-0 bg-brand-blue/10 mix-blend-overlay" />
                     </div>
-                ) : (
-                    <>
-                        <h1 className="text-5xl md:text-7xl font-extrabold mb-2 tracking-tight text-slate-900 dark:text-white">
-                            UMANG <span className="text-brand-orange">2026</span>
-                        </h1>
-                        <p className="text-xl text-gray-600 dark:text-gray-400 mb-6">Annual Sports & Cultural Fest</p>
 
-                        {/* Countdown */}
-                        <div className="grid grid-cols-4 gap-2 max-w-md mx-auto mb-10">
-                            <div className="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-lg border-b-4 border-brand-blue">
-                                <span className="block text-2xl font-bold dark:text-white">{timeLeft.days}</span>
-                                <span className="text-xs text-gray-500">Days</span>
+                    {/* Video Controls - Adjusted for mobile */}
+                    <div className="absolute top-24 right-4 md:top-auto md:bottom-8 md:right-8 z-30 flex flex-col md:flex-row gap-3 md:gap-4">
+                        <button
+                            onClick={togglePlay}
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-full text-white transition-all transform hover:scale-110"
+                        >
+                            {isPlaying ? <Activity size={20} className="animate-pulse" /> : <div className="w-5 h-5 flex items-center justify-center">▶</div>}
+                        </button>
+                        <button
+                            onClick={toggleMute}
+                            className="bg-white/10 hover:bg-white/20 backdrop-blur-md p-2 md:p-3 rounded-full text-white transition-all transform hover:scale-110"
+                        >
+                            {isMuted ? <div className="w-5 h-5 flex items-center justify-center">🔇</div> : <div className="w-5 h-5 flex items-center justify-center">🔊</div>}
+                        </button>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative z-20 text-center max-w-5xl mx-auto flex flex-col justify-center items-center h-full pt-16 pb-12">
+                        {/* Live Status Pill */}
+                        <motion.div
+                            initial={{ y: -20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="mb-6 md:mb-8"
+                        >
+                            <span className={`px-4 md:px-6 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest shadow-lg border border-white/20 backdrop-blur-md ${eventStatus.includes('Live') ? 'bg-red-600/90 text-white animate-pulse' :
+                                eventStatus === 'Zonal End' ? 'bg-gray-800/90 text-white' :
+                                    'bg-white/10 text-brand-orange-light'
+                                }`}>
+                                {eventStatus === 'Zonal End' ? 'Event Completed' : eventStatus}
+                            </span>
+                        </motion.div>
+
+                        {/* Title - Responsive Sizing */}
+                        <motion.h1
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight drop-shadow-2xl"
+                        >
+                            PATNA DIVISIONAL
+                            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-red-500 mt-1 md:mt-2">
+                                SPORTS FEST
+                            </span>
+                        </motion.h1>
+
+                        {/* Subtext */}
+                        <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.4 }}
+                            className="text-lg md:text-3xl text-gray-200 font-light mb-8 md:mb-10 tracking-widest px-4"
+                        >
+                            Zonal Level Sports Fest 2026
+                        </motion.p>
+
+                        {/* Info Pills */}
+                        <motion.div
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.5 }}
+                            className="flex flex-wrap justify-center gap-3 md:gap-4 mb-10 md:mb-12 text-white px-2"
+                        >
+                            <div className="flex items-center gap-2 md:gap-3 bg-white/10 px-4 md:px-6 py-2 md:py-3 rounded-full backdrop-blur-md border border-white/10 hover:bg-white/20 transition cursor-default">
+                                <Calendar className="w-4 h-4 md:w-5 md:h-5 text-brand-orange" />
+                                <span className="text-sm md:text-base font-semibold tracking-wide">15-17 Jan 2026</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-lg border-b-4 border-brand-blue">
-                                <span className="block text-2xl font-bold dark:text-white">{timeLeft.hours}</span>
-                                <span className="text-xs text-gray-500">Hours</span>
+                            <div className="flex items-center gap-2 md:gap-3 bg-white/10 px-4 md:px-6 py-2 md:py-3 rounded-full backdrop-blur-md border border-white/10 hover:bg-white/20 transition cursor-default">
+                                <MapPin className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
+                                <span className="text-sm md:text-base font-semibold tracking-wide">GEC Buxar (Host)</span>
                             </div>
-                            <div className="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-lg border-b-4 border-brand-blue">
-                                <span className="block text-2xl font-bold dark:text-white">{timeLeft.minutes}</span>
-                                <span className="text-xs text-gray-500">Mins</span>
+                        </motion.div>
+
+                        {/* Main CTA */}
+                        <motion.div
+                            initial={{ y: 30, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ delay: 0.6 }}
+                            className="flex flex-col items-center w-full px-4"
+                        >
+                            <button
+                                onClick={() => setView('zonal')}
+                                className="w-full max-w-sm md:w-auto px-6 md:px-10 py-4 md:py-5 bg-gradient-to-r from-brand-orange to-red-600 text-white rounded-2xl font-bold text-lg md:text-xl shadow-2xl hover:shadow-orange-500/50 hover:scale-105 transition-all flex items-center justify-center gap-3 group"
+                            >
+                                View Today's Schedule
+                                <ChevronLeft className="rotate-180 group-hover:translate-x-2 transition-transform" />
+                            </button>
+                            <div className="mt-6 md:mt-8">
+                                <button
+                                    onClick={() => setView('intra')}
+                                    className="text-gray-300 hover:text-white font-medium text-sm transition-colors border-b border-transparent hover:border-white/50 pb-1"
+                                >
+                                    View Past Winners (Intra)
+                                </button>
                             </div>
-                            <div className="bg-white dark:bg-slate-800 p-3 rounded-xl shadow-lg border-b-4 border-brand-orange">
-                                <span className="block text-2xl font-bold text-brand-orange">{timeLeft.seconds}</span>
-                                <span className="text-xs text-gray-500">Secs</span>
-                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+
+                {/* Featured Events Section */}
+                <div className="py-20 bg-gray-50 dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800">
+                    <div className="container mx-auto px-4">
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                                FEATURED EVENTS
+                            </h2>
+                            <div className="w-20 h-1 bg-brand-orange mx-auto rounded-full" />
                         </div>
-                    </>
-                )}
 
-                <p className="text-sm font-medium text-gray-500 uppercase tracking-widest mb-8 flex items-center justify-center gap-2">
-                    <MapPin className="text-brand-orange" size={16} />
-                    GEC Buxar
-                </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {zonalEvents.filter(e => e.image).map((event, idx) => (
+                                <motion.div
+                                    key={event.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: idx * 0.1 }}
+                                    onClick={() => setView('zonal')}
+                                    className="group relative h-80 rounded-3xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all"
+                                >
+                                    <div className="absolute inset-0 bg-slate-900" />
+                                    <img
+                                        src={event.image}
+                                        alt={event.name}
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-                {/* Entry Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto text-left">
-                    <Link to="/sports" className="group relative overflow-hidden p-8 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 text-white shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1">
-                        <Activity className="mb-4" size={40} />
-                        <h3 className="text-2xl font-bold">Sports Activities</h3>
-                        <p className="text-blue-100 mt-2 text-sm">Cricket, Volleyball, Kabaddi & more</p>
-                    </Link>
-                    <Link to="/cultural" className="group relative overflow-hidden p-8 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 text-white shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1">
-                        <Music className="mb-4" size={40} />
-                        <h3 className="text-2xl font-bold">Cultural & Lit</h3>
-                        <p className="text-orange-100 mt-2 text-sm">Debate, Singing, Poetry & more</p>
-                    </Link>
+                                    <div className="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                        <div className="text-brand-orange mb-2 text-3xl">
+                                            {event.icon}
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
+                                            {event.name}
+                                        </h3>
+                                        <p className="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 line-clamp-2">
+                                            {event.description}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            </header>
 
-            {/* Live/Upcoming Section */}
-            <section className="max-w-4xl mx-auto mb-12">
-                <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-bold border-l-4 border-brand-orange pl-3 text-slate-800 dark:text-white">
-                        {activeEvents.length > 0 ? 'Live Now' : 'Featured Upcoming'}
-                    </h2>
-                    {activeEvents.length > 0 && (
-                        <span className="flex h-3 w-3 relative">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                        </span>
-                    )}
+                <div className="w-full">
+                    <ParticipatingColleges />
+                </div>
+            </motion.div>
+        );
+    };
+
+    const IntraView = () => {
+        const categories = {
+            'Literary & Cultural': intraEvents.filter(e => e.category === 'cultural'),
+            'Athletics': intraEvents.filter(e => e.category === 'sports' && e.subcategory === 'Athletics'),
+            'Team Sports & Games': intraEvents.filter(e => e.category === 'sports' && !e.subcategory)
+        };
+
+        return (
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="pt-24 pb-20 px-4 max-w-7xl mx-auto"
+            >
+                <button onClick={handleBack} className="flex items-center gap-1 text-brand-blue font-bold mb-6 hover:underline">
+                    <ChevronLeft size={20} /> Back to Home
+                </button>
+
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2 flex items-center justify-center gap-3">
+                        <Trophy className="text-yellow-500" size={40} /> Winners Circle
+                    </h1>
+                    <p className="text-gray-500 dark:text-gray-400">Intra College Event Results (09-12 Jan 2026)</p>
                 </div>
 
-                <div className="grid gap-4">
-                    {displayEvents.map(event => (
-                        <Link to={`/events/${event.id}`} key={event.id} className="block bg-white dark:bg-slate-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-xl transition">
-                            <div className="bg-gray-900 text-white p-3 flex justify-between items-center">
-                                <span className="text-xs font-bold uppercase tracking-wider text-gray-400">{event.name}</span>
-                                <span className={`text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase ${event.status === 'live' ? 'bg-red-600' : 'bg-blue-600'}`}>
-                                    {event.status}
-                                </span>
-                            </div>
-                            <div className="p-5">
-                                <div className="flex justify-between items-center mb-2">
-                                    <h3 className="text-xl font-bold dark:text-white">{event.gender} Category</h3>
-                                    <p className="text-sm text-gray-500">{event.venue}</p>
-                                </div>
-                                {event.schedule && event.schedule[0] ? (
-                                    <p className="text-gray-600 dark:text-gray-300 text-sm">Next Match: {event.schedule[0].matches[0].match}</p>
-                                ) : (
-                                    <p className="text-gray-500 text-sm">{event.description}</p>
-                                )}
-                            </div>
-                            {event.status === 'live' && (
-                                <div className="w-full py-3 bg-gray-50 dark:bg-slate-700 text-center text-sm font-semibold text-brand-blue flex items-center justify-center">
-                                    View Live Scoreboard <ArrowRight size={16} className="ml-1" />
-                                </div>
-                            )}
-                        </Link>
+                <div className="space-y-16">
+                    <section>
+                        <h2 className="text-2xl font-bold mb-6 text-brand-orange border-l-4 border-brand-orange pl-3">
+                            Arts, Literature & Cultural
+                        </h2>
+                        <WinnerList events={categories['Literary & Cultural']} />
+                    </section>
+                    <section>
+                        <h2 className="text-2xl font-bold mb-6 text-blue-600 border-l-4 border-blue-600 pl-3">
+                            Athletics (Track & Field)
+                        </h2>
+                        <WinnerList events={categories['Athletics']} />
+                    </section>
+                    <section>
+                        <h2 className="text-2xl font-bold mb-6 text-green-600 border-l-4 border-green-600 pl-3">
+                            Sports & Games
+                        </h2>
+                        <WinnerList events={categories['Team Sports & Games']} />
+                    </section>
+                </div>
+
+                <div className="mt-20">
+                    <ParticipatingColleges />
+                </div>
+            </motion.div>
+        );
+    };
+
+    const ZonalView = () => {
+        return (
+            <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="pt-24 pb-20 px-4 max-w-7xl mx-auto"
+            >
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <button onClick={handleBack} className="flex items-center gap-1 text-brand-blue font-bold hover:underline">
+                        <ChevronLeft size={20} /> Back to Home
+                    </button>
+
+                    <a
+                        href="/RULEBOOK/UMANG'25 GEC BUXAR BROUCHER.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-brand-orange text-white px-6 py-2 rounded-full font-bold shadow-lg hover:shadow-xl hover:bg-orange-600 transition flex items-center gap-2"
+                    >
+                        <Download size={18} /> Download Brochure / Rule Book
+                    </a>
+                </div>
+
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">
+                        PATNA DIVISIONAL SPORTS FEST
+                    </h1>
+                    <div className="bg-brand-blue/10 inline-block px-4 py-2 rounded-lg border border-brand-blue/30">
+                        <p className="text-lg font-bold text-brand-blue">
+                            {eventStatus.includes('Live') ? eventStatus : '15 January - 17 January 2026'}
+                        </p>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-6">
+                    {zonalEvents.map((event, idx) => (
+                        <EventCard key={event.id} event={event} index={idx} />
                     ))}
                 </div>
-            </section>
 
-            {/* Spin & Win */}
-            <section className="max-w-4xl mx-auto mb-16">
-                <SpinWheel />
-            </section>
+                <div className="mt-20">
+                    <ParticipatingColleges />
+                </div>
+            </motion.div>
+        );
+    };
 
-            {/* Winner Section */}
-            <section className="max-w-4xl mx-auto mb-16">
-                <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 text-white text-center shadow-lg relative overflow-hidden">
-                    <div className="relative z-10">
-                        <Trophy size={48} className="mx-auto mb-4 text-white drop-shadow-md" />
-                        <h2 className="text-3xl font-bold mb-2">Winners Circle</h2>
-                        <p className="text-white/90 font-medium text-lg">Results will be announced here after the events.</p>
+    return (
+        <div className="min-h-screen bg-white dark:bg-slate-900">
+            <AnimatePresence mode="wait">
+                {view === 'landing' && <LandingView key="landing" />}
+                {view === 'intra' && <IntraView key="intra" />}
+                {view === 'zonal' && <ZonalView key="zonal" />}
+            </AnimatePresence>
+        </div>
+    );
+};
+
+const EventCard = ({ event, index }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 group"
+        >
+            <div
+                className="p-6 cursor-pointer flex flex-col md:flex-row gap-6 md:items-center"
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <div className="flex items-center gap-4 flex-1">
+                    <div className="w-16 h-16 rounded-xl bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-3xl shadow-sm group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300">
+                        {event.icon}
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2 group-hover:text-brand-blue transition-colors">
+                            {event.name}
+                            <ChevronDown size={20} className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'group-hover:translate-y-1'}`} />
+                        </h3>
+                        <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1 mt-1">
+                            <MapPin size={14} /> {event.venue}
+                        </p>
                     </div>
                 </div>
-            </section>
 
-            {/* Contact Section */}
-            <section className="max-w-4xl mx-auto mb-16">
-                <h2 className="text-xl font-bold mb-6 text-slate-900 dark:text-white flex items-center gap-2">
-                    <Phone className="text-brand-blue" /> Contact & Coordination
-                </h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                    {/* Faculty */}
-                    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border-l-4 border-brand-blue">
-                        <h3 className="font-bold text-gray-500 uppercase text-xs tracking-wider mb-4">Faculty In-Charge</h3>
-                        <div className="space-y-4">
-                            {FESTIVAL_DETAILS.contacts.faculty.map((contact, idx) => (
-                                <div key={idx} className="flex justify-between items-center">
-                                    <div>
-                                        <p className="font-bold text-slate-900 dark:text-white">{contact.name}</p>
-                                        <p className="text-xs text-gray-500">{contact.role}</p>
-                                    </div>
-                                    <a href={`tel:${contact.phone}`} className="text-brand-blue font-mono font-medium">{contact.phone}</a>
-                                </div>
-                            ))}
-                        </div>
+                <div className="hidden md:flex gap-8 text-sm text-gray-600 dark:text-gray-300">
+                    <div className="flex flex-col items-end">
+                        <span className="text-xs uppercase text-gray-400 font-bold">Category</span>
+                        <span>{event.category}</span>
                     </div>
-                    {/* Student */}
-                    <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border-l-4 border-brand-orange">
-                        <h3 className="font-bold text-gray-500 uppercase text-xs tracking-wider mb-4">Schedule Coordinators</h3>
-                        <div className="space-y-4">
-                            {FESTIVAL_DETAILS.contacts.student.map((contact, idx) => (
-                                <div key={idx} className="flex justify-between items-center">
-                                    <div>
-                                        <p className="font-bold text-slate-900 dark:text-white">{contact.name}</p>
-                                        <p className="text-xs text-gray-500">{contact.batch} Batch</p>
+                    {event.schedule && event.schedule[0] && (
+                        <div className="flex flex-col items-end">
+                            <span className="text-xs uppercase text-gray-400 font-bold">First Day</span>
+                            <span>{event.schedule[0].day.split('(')[0]}</span>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <AnimatePresence>
+                {isOpen && (
+                    <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden border-t border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-slate-800/50"
+                    >
+                        <div className="p-6 pt-2">
+                            {/* Teams */}
+                            {event.teams && (
+                                <div className="mb-6 bg-blue-50 dark:bg-blue-900/10 p-4 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                                    <h4 className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 mb-3 flex items-center gap-2">
+                                        <Swords size={14} /> Participating Teams
+                                    </h4>
+                                    <div className="flex flex-wrap gap-2">
+                                        {event.teams.map((team, tIdx) => (
+                                            <span key={tIdx} className="text-xs font-bold px-3 py-1 bg-white dark:bg-slate-800 text-slate-700 dark:text-gray-300 rounded shadow-sm border border-gray-100 dark:border-gray-700">
+                                                {team}
+                                            </span>
+                                        ))}
                                     </div>
-                                    <a href={`tel:${contact.phone}`} className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition">
-                                        <Phone size={18} />
+                                </div>
+                            )}
+
+                            {/* Coordinators */}
+                            {event.coordinators && (
+                                <div className="mb-6 bg-white dark:bg-slate-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+                                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
+                                        <User size={14} /> Coordinators
+                                    </h4>
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                        {event.coordinators.map((c, i) => (
+                                            <div key={i} className="flex flex-col">
+                                                <span className="font-bold text-slate-900 dark:text-white text-sm">{c.name}</span>
+                                                <span className="text-xs text-brand-blue font-mono">{c.phone}</span>
+                                                <span className="text-[10px] text-gray-400 uppercase">{c.role}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Schedule Table */}
+                            {event.schedule && (
+                                <div>
+                                    <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
+                                        <Clock size={14} /> Match Schedule
+                                    </h4>
+                                    <div className="space-y-4">
+                                        {event.schedule.map((day, dIdx) => (
+                                            <div key={dIdx} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700">
+                                                <div className="bg-gray-100 dark:bg-slate-700 px-4 py-2 text-sm font-bold text-gray-700 dark:text-gray-200">
+                                                    {day.day}
+                                                </div>
+                                                <div className="divide-y divide-gray-100 dark:divide-gray-700">
+                                                    {day.matches.map((match, mIdx) => (
+                                                        <div key={mIdx} className="p-3 flex flex-col md:flex-row md:items-center justify-between gap-2 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition">
+                                                            <div className="flex items-center gap-3">
+                                                                <span className="text-xs font-mono bg-blue-50 text-blue-600 px-2 py-1 rounded dark:bg-blue-900/30 dark:text-blue-400 whitespace-nowrap">
+                                                                    {match.time}
+                                                                </span>
+                                                                <span className="font-medium text-slate-800 dark:text-gray-200 text-sm">
+                                                                    {match.match}
+                                                                </span>
+                                                            </div>
+                                                            {match.venue && match.venue !== event.venue && (
+                                                                <span className="text-xs text-gray-400 flex items-center gap-1 md:justify-end">
+                                                                    <MapPin size={10} /> {match.venue}
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Actions */}
+                            {event.rulebook && (
+                                <div className="mt-6 flex justify-end">
+                                    <a
+                                        href={event.rulebook}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-xs font-bold text-gray-500 hover:text-brand-blue flex items-center gap-1 transition-colors"
+                                    >
+                                        <ExternalLink size={14} /> View Rulebook PDF
                                     </a>
                                 </div>
-                            ))}
+                            )}
                         </div>
-                    </div>
-                </div>
-            </section>
-
-            <Contact />
-        </div >
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 
